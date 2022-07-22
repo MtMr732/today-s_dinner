@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import TextFields from './Textfields';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
@@ -23,7 +24,7 @@ export default function AddMenus() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>メニューを追加する</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -31,12 +32,8 @@ export default function AddMenus() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <TextFields>メニュー名</TextFields>
+          <TextFields>内容</TextFields>
           <Button variant='contained'>
             追加
           </Button>
