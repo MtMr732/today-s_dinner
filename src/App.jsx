@@ -6,7 +6,6 @@ import Menu from './Menu';
 import AddMenus from './AddMenus';
 import * as React from 'react';
 import MenuList from "./MenuList"
-import { render } from '@testing-library/react';
 
 const Item = styled(Paper)(({ theme }) => ({
 backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -20,35 +19,46 @@ export default class App extends React.Component{
   constructor(props){
     super(props);
       this.state = {
+        menus: [],
+        mainMenu:[],
+        sideMenu:[],
+        garnish:[],
         dateset: datesetDefault,
-        Menu: [],
         open: false,
       }
   }
+
+  getMenus = () => {
+    const menus = this.state.dateset;
+    const mainMenu = menus.Menus.mainMenu;
+    const sideMenu = menus.Menus.sideMenus;
+    const garnish = menus.Menus.garnish;
+    console.log(menus);
+
+    this.setState({
+      menus:menus,
+      mainMenu:mainMenu,
+      sideMenu:sideMenu,
+      garnish:garnish
+    })
+  }
+
+  componentDidMount(){
+    this.getMenus()
+  }
+
     render() {
       return (
         <React.Fragment>
           <section className='menus'>
-            <section className='main-menu'>
-              <Menu>
-              </Menu>
-              <Menu>
-              </Menu>
-            </section>
-          <section className='side-menu'>
-            <Menu>
-            </Menu>
-          </section>
-          <section className='other-menu'>
-            <Menu>
-            </Menu>
-          </section>
+          <MenuList menus={this.state.mainMenu}></MenuList>
+          <MenuList menus={this.state.sideMenu}></MenuList>
+          <MenuList menus={this.state.garnish}></MenuList>
           </section>
           <section className='add-menu'>
             <AddMenus >
             </AddMenus>
           </section>
-          <MenuList></MenuList>
         </React.Fragment>
       );
     }

@@ -12,7 +12,8 @@ export default function TextFields() {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <TextField id="outlined-basic" label="メニュー名" variant="outlined" />
+      <TextField id="outlined-basic" label="内容" variant="outlined" />
     </Box>
   );
 }

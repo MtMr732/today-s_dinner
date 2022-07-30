@@ -38,10 +38,10 @@ const Menu = (props)=> {
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs >
               <Typography gutterBottom variant="subtitle1" component="div">
-                料理名
+                {props.name}
               </Typography>
               <Typography variant="body2" gutterBottom className='text'>
-                料理の詳細
+                {props.content}
               </Typography>
             </Grid>
           </Grid>

@@ -1,12 +1,16 @@
-import gyouzaImage from '../src/assets/img/gyouza.jpg'
-
 const datesetDefault = {
-  "menus":{
-    "menu":[
-      {"id":1},
-      {"name":"gyouza"},
-      {"image":"gyouzaImage"},
-      {"content":"お肉がポイント"}
+  "Menus":{
+    mainMenu:[
+      {name:"gyouza",content:"お肉がポイント"},
+      {name:"karaage",content:"お肉がポイント"},
+      {name:"udon",content:"お肉がポイント"},
+    ],
+    sideMenus:[
+      {name:"sarada",content:"やすい"},
+      {name:"misosiru",content:"インスタント"},
+    ],
+    garnish:[
+      {name:"きゅうりのつけもの",content:"塩で水分を抜くのがポイント"},
     ]
   }
 }

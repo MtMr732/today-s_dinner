@@ -32,8 +32,7 @@ export default function AddMenus() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <TextFields>メニュー名</TextFields>
-          <TextFields>内容</TextFields>
+          <TextFields></TextFields>
           <Button variant='contained'>
             追加
           </Button>

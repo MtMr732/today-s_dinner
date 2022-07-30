@@ -1,14 +1,13 @@
 import React from "react";
 import Menu from "./Menu"
 
-const MenuList = () => {
+const MenuList = (props) => {
   return (
     <div>
-      <Menu></Menu>
-      <Menu></Menu>
-      <Menu></Menu>
+      {props.menus.map((value,index) => {
+        return <Menu name = {value.name} content = {value.content} key={index.toString()}></Menu>
+      })}
     </div>
   )
-}
-
-export default MenuList;
+};
+export default MenuList
