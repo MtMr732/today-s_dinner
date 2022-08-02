@@ -2,7 +2,6 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import './assets/styles/style.css';
 import datesetDefault from './dataset';
-import Menu from './Menu';
 import AddMenus from './AddMenus';
 import * as React from 'react';
 import MenuList from "./MenuList"
@@ -26,14 +25,15 @@ export default class App extends React.Component{
         dateset: datesetDefault,
         open: false,
       }
-  }
+      this.getMenus = this.getMenus.bind(this)
+    }
 
   getMenus = () => {
     const menus = this.state.dateset;
     const mainMenu = menus.Menus.mainMenu;
     const sideMenu = menus.Menus.sideMenus;
     const garnish = menus.Menus.garnish;
-    console.log(menus);
+    // console.log(menus);
 
     this.setState({
       menus:menus,
@@ -51,12 +51,12 @@ export default class App extends React.Component{
       return (
         <React.Fragment>
           <section className='menus'>
-          <MenuList menus={this.state.mainMenu}></MenuList>
-          <MenuList menus={this.state.sideMenu}></MenuList>
-          <MenuList menus={this.state.garnish}></MenuList>
+            <MenuList menus={this.state.mainMenu}></MenuList>
+            <MenuList menus={this.state.sideMenu}></MenuList>
+            <MenuList menus={this.state.garnish}></MenuList>
           </section>
           <section className='add-menu'>
-            <AddMenus >
+            <AddMenus getMenus = {this.state.getMenus}>
             </AddMenus>
           </section>
         </React.Fragment>

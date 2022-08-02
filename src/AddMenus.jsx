@@ -1,9 +1,12 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import TextFields from './Textfields';
-import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
+import datesetDefault from './dataset';
+import MenuItem from '@mui/material/MenuItem';
+
 
 const style = {
   position: 'absolute',
@@ -17,10 +20,81 @@ const style = {
   p: 4,
 };
 
-export default function AddMenus() {
+const AddMenus = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [currency, setCurrency] = React.useState('');
+  // const [name, setName] = useState("");
+  // const [content, setContent] = useState("");
+  let name = "";
+  let content = "";
+
+  const currencies = [
+  {
+    value: 'mainMenu',
+    label: '主菜',
+  },
+  {
+    value: 'sideMenu',
+    label: '副菜',
+  },
+  {
+    value: 'garnish',
+    label: '付け合わせ',
+  }
+  ];
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
+
+  const display = () => {
+    const garnishList = datesetDefault.Menus.garnish;
+    name = document.querySelector('#menu-name').value;
+    content = document.querySelector('#menu-content').value;
+    const addedObject = {name,content};
+    garnishList.push(addedObject);
+    console.log(garnishList)
+  }
+
+  // displayメソッドでデータの送信（コンソールログで出力）はできている。
+  // 次はログに表示されたデータで親コンポーネントのstateを更新させる
+  const sendDate = () =>{
+    const menuType = document.querySelector('menu-type');
+    const name = document.querySelector('#menu-name');
+    const content = document.querySelector('#menu-content');
+    const addedObject = {name,content};
+
+    //デバッグ用コンソール出力
+    console.log(name,content);
+    switch(menuType.value){
+      case 'mainMenu':
+        fetch(datesetDefault.Menus.mainMenu,{
+          method:'POST',
+          body:JSON.stringify(datesetDefault),
+        }).then(()=>{
+          alert("メニューの追加が完了しました。")
+          name = "";
+          content = "";
+        })
+        break
+      case 'sideMenu':
+        fetch(datesetDefault.Menus.sideMenus,{
+          method:'POST',
+          body:JSON.stringify(datesetDefault),
+        }).then(()=>{
+          alert("メニューの追加が完了しました。")
+          name = "";
+          content = "";
+        })
+        break
+      case 'garnish':
+        // datesetDefault.Menus.garnish.push(
+        //   {name,content}
+        // )
+        display();
+    }
+  }
 
   return (
     <div>
@@ -32,8 +106,34 @@ export default function AddMenus() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <TextFields></TextFields>
-          <Button variant='contained'>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                id="menu-type"
+                select
+                label="Select"
+                value={currency}
+                onChange={handleChange}
+                helperText="メニューの種別を入力してください"
+              >
+                {currencies.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+            <TextField id="menu-name" label="メニュー名" variant="outlined"/>
+            <TextField id="menu-content" label="内容" variant="outlined"/>
+          </Box>
+          <Button variant='contained' onClick={display}>
             追加
           </Button>
         </Box>
@@ -41,3 +141,4 @@ export default function AddMenus() {
     </div>
   );
 }
+export default  AddMenus
