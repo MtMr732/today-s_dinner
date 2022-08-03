@@ -56,7 +56,7 @@ export default class App extends React.Component{
             <MenuList menus={this.state.garnish}></MenuList>
           </section>
           <section className='add-menu'>
-            <AddMenus getMenus = {this.state.getMenus}>
+            <AddMenus getMenus = {this.getMenus}>
             </AddMenus>
           </section>
         </React.Fragment>

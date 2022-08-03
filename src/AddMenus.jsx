@@ -25,10 +25,10 @@ const AddMenus = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [currency, setCurrency] = React.useState('');
-  // const [name, setName] = useState("");
-  // const [content, setContent] = useState("");
-  let name = "";
-  let content = "";
+  let [name, setName] = useState("");
+  let [content, setContent] = useState("");
+  // let name = "";
+  // let content = "";
 
   const currencies = [
   {
@@ -48,26 +48,42 @@ const AddMenus = (props) => {
     setCurrency(event.target.value);
   };
 
-  const display = () => {
-    const garnishList = datesetDefault.Menus.garnish;
-    name = document.querySelector('#menu-name').value;
-    content = document.querySelector('#menu-content').value;
-    const addedObject = {name,content};
-    garnishList.push(addedObject);
-    console.log(garnishList)
+  const handleName = (str) => {
+    setName(str);
   }
 
-  // displayメソッドでデータの送信（コンソールログで出力）はできている。
-  // 次はログに表示されたデータで親コンポーネントのstateを更新させる
+  const handleContent = (str) =>{
+    setContent(str);
+  }
+
+  const send = () => {
+    const garnishList = datesetDefault.Menus.garnish;
+    name = handleName(document.querySelector('#menu-name').value);
+    content = handleContent(document.querySelector('#menu-content').value);
+
+    const addedObject = {name,content};
+    garnishList.push(addedObject);
+    console.log(garnishList);
+  }
+
+
   const sendDate = () =>{
-    const menuType = document.querySelector('menu-type');
+    const menuType = document.querySelector('#menu-type').value;
+    console.log(menuType);
     const name = document.querySelector('#menu-name');
     const content = document.querySelector('#menu-content');
     const addedObject = {name,content};
-
     //デバッグ用コンソール出力
-    console.log(name,content);
-    switch(menuType.value){
+    console.log(name.value,content.value);
+    // send();
+    // props.getMenus();
+    // 条件式のmenuTypeが機能していない
+    if(menuType == "garnish"){
+        console.log(menuType.value);
+        send();
+        this.props.getMenus();
+    }
+    switch(menuType){
       case 'mainMenu':
         fetch(datesetDefault.Menus.mainMenu,{
           method:'POST',
@@ -92,7 +108,10 @@ const AddMenus = (props) => {
         // datesetDefault.Menus.garnish.push(
         //   {name,content}
         // )
-        display();
+        console.log(menuType.value);
+        send();
+        this.props.getMenus();
+        break
     }
   }
 
@@ -133,7 +152,7 @@ const AddMenus = (props) => {
             <TextField id="menu-name" label="メニュー名" variant="outlined"/>
             <TextField id="menu-content" label="内容" variant="outlined"/>
           </Box>
-          <Button variant='contained' onClick={display}>
+          <Button variant='contained' onClick={sendDate}>
             追加
           </Button>
         </Box>
