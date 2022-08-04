@@ -56,61 +56,69 @@ const AddMenus = (props) => {
     setContent(str);
   }
 
-  const send = () => {
-    const garnishList = datesetDefault.Menus.garnish;
-    name = handleName(document.querySelector('#menu-name').value);
-    content = handleContent(document.querySelector('#menu-content').value);
-
-    const addedObject = {name,content};
-    garnishList.push(addedObject);
-    console.log(garnishList);
-  }
+  // const send = () => {
+  //   const garnishList = datesetDefault.Menus.garnish;
+  //   name = handleName(document.querySelector('#menu-name').value);
+  //   content = handleContent(document.querySelector('#menu-content').value);
+  //   // console.log(name,content);
+  //   const addedObject = {name,content};
+  //   garnishList.push(addedObject);
+  //   console.log(garnishList);
+  // }
 
 
   const sendDate = () =>{
-    const menuType = document.querySelector('#menu-type').value;
-    console.log(menuType);
-    const name = document.querySelector('#menu-name');
-    const content = document.querySelector('#menu-content');
+    const menuType = document.querySelector('#menu-type').innerHTML;
+      // console.log(Object.prototype.toString.call(menuType.innerHTML));
+      // console.log(menuType.innerHTML);
+    const name = document.querySelector('#menu-name').value;
+    const content = document.querySelector('#menu-content').value;
     const addedObject = {name,content};
-    //デバッグ用コンソール出力
-    console.log(name.value,content.value);
-    // send();
+      console.log(name, content);
+    // sendメソッドを下記に移植
+    // garnishList.push(addedObject);
     // props.getMenus();
     // 条件式のmenuTypeが機能していない
-    if(menuType == "garnish"){
-        console.log(menuType.value);
-        send();
-        this.props.getMenus();
-    }
     switch(menuType){
-      case 'mainMenu':
-        fetch(datesetDefault.Menus.mainMenu,{
-          method:'POST',
-          body:JSON.stringify(datesetDefault),
-        }).then(()=>{
-          alert("メニューの追加が完了しました。")
-          name = "";
-          content = "";
-        })
+      case '主菜':
+        datesetDefault.Menus.mainMenu.push(addedObject)
+        props.getMenus();
+        // jsonファイルでデータ通信するときに使用
+        // fetch(datesetDefault.Menus.mainMenu,{
+        //   method:'POST',
+        //   body:JSON.stringify(datesetDefault),
+        // }).then(()=>{
+        //   alert("メニューの追加が完了しました。")
+        //   name = "";
+        //   content = "";
+        // })
         break
-      case 'sideMenu':
-        fetch(datesetDefault.Menus.sideMenus,{
-          method:'POST',
-          body:JSON.stringify(datesetDefault),
-        }).then(()=>{
-          alert("メニューの追加が完了しました。")
-          name = "";
-          content = "";
-        })
+      case '副菜':
+        datesetDefault.Menus.sideMenus.push(addedObject)
+        props.getMenus();
+        // jsonファイルでデータ通信するときに使用
+          // fetch(datesetDefault.Menus.sideMenus,{
+          //   method:'POST',
+          //   body:JSON.stringify(datesetDefault),
+          // }).then(()=>{
+          //   alert("メニューの追加が完了しました。")
+          //   name = "";
+          //   content = "";
+          // })
         break
-      case 'garnish':
-        // datesetDefault.Menus.garnish.push(
-        //   {name,content}
-        // )
-        console.log(menuType.value);
-        send();
-        this.props.getMenus();
+      case '付け合わせ':
+        // console.log(menuType.value);
+        datesetDefault.Menus.garnish.push(addedObject)
+        props.getMenus();
+        // jsonファイルでデータ通信するときに使用
+          // fetch(datesetDefault.Menus.sideMenus,{
+          //   method:'POST',
+          //   body:JSON.stringify(datesetDefault),
+          // }).then(()=>{
+          //   alert("メニューの追加が完了しました。")
+          //   name = "";
+          //   content = "";
+          // })
         break
     }
   }
