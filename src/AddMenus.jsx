@@ -125,7 +125,7 @@ const AddMenus = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>メニューを追加する</Button>
+      <Button onClick={handleOpen} variant="contained">メニューを追加する</Button>
       <Modal
         open={open}
         onClose={handleClose}

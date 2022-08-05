@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { createStyles, makeStyles, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import gyouza from './assets/img/gyouza.jpg'
-import { textAlign } from '@mui/system';
 
 
 
@@ -25,7 +24,8 @@ const Menu = (props)=> {
         maxWidth:400,
         flexGrow: 1,
         backgroundColor: (theme) =>
-          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          theme.palette.mode === 'dark' ? '#1A2027' :
+          props.color,
       }}
     >
       <Grid container spacing={2}>
