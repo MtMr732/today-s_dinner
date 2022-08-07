@@ -69,19 +69,18 @@ const AddMenus = (props) => {
 
   const sendDate = () =>{
     const menuType = document.querySelector('#menu-type').innerHTML;
-      // console.log(Object.prototype.toString.call(menuType.innerHTML));
-      // console.log(menuType.innerHTML);
     const name = document.querySelector('#menu-name').value;
     const content = document.querySelector('#menu-content').value;
-    const addedObject = {name,content};
+    let id ;
+    let addedObject = {};
+
       console.log(name, content);
-    // sendメソッドを下記に移植
-    // garnishList.push(addedObject);
-    // props.getMenus();
-    // 条件式のmenuTypeが機能していない
     switch(menuType){
       case '主菜':
-        datesetDefault.Menus.mainMenu.push(addedObject)
+        id = datesetDefault.Menus.mainMenu.length + 1;
+        addedObject = {id,name,content};
+        datesetDefault.Menus.mainMenu.push(addedObject);
+        console.log(datesetDefault.Menus.mainMenu);
         props.getMenus();
         // jsonファイルでデータ通信するときに使用
         // fetch(datesetDefault.Menus.mainMenu,{
@@ -94,7 +93,10 @@ const AddMenus = (props) => {
         // })
         break
       case '副菜':
-        datesetDefault.Menus.sideMenus.push(addedObject)
+        id = datesetDefault.Menus.sideMenus.length + 1
+        addedObject = {id,name,content};
+        datesetDefault.Menus.sideMenus.push(addedObject);
+        console.log(datesetDefault.Menus.sideMenus)
         props.getMenus();
         // jsonファイルでデータ通信するときに使用
           // fetch(datesetDefault.Menus.sideMenus,{
@@ -107,8 +109,10 @@ const AddMenus = (props) => {
           // })
         break
       case '付け合わせ':
-        // console.log(menuType.value);
-        datesetDefault.Menus.garnish.push(addedObject)
+        id = datesetDefault.Menus.garnish.length +1 ;
+        addedObject = {id,name,content};
+        datesetDefault.Menus.garnish.push(addedObject);
+        console.log(datesetDefault.Menus.garnish);
         props.getMenus();
         // jsonファイルでデータ通信するときに使用
           // fetch(datesetDefault.Menus.sideMenus,{

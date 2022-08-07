@@ -1,16 +1,16 @@
 const datesetDefault = {
   "Menus":{
     mainMenu:[
-      {name:"餃子",content:"お肉がポイント"},
-      {name:"からあげ",content:"お肉がポイント"},
-      {name:"うどん",content:"お肉がポイント"},
+      {id:1,name:"餃子",content:"お肉がポイント"},
+      {id:2,name:"からあげ",content:"お肉がポイント"},
+      {id:3,name:"うどん",content:"お肉がポイント"},
     ],
     sideMenus:[
-      {name:"サラダ",content:"やすい"},
-      {name:"味噌汁",content:"インスタント"},
+      {id:1,name:"サラダ",content:"やすい"},
+      {id:2,name:"味噌汁",content:"インスタント"},
     ],
     garnish:[
-      {name:"きゅうりのつけもの",content:"塩で水分を抜くのがポイント"},
+      {id:1,name:"きゅうりのつけもの",content:"塩で水分を抜くのがポイント"},
     ]
   }
 }

@@ -6,7 +6,6 @@ import AddMenus from './AddMenus';
 import * as React from 'react';
 import MenuList from "./MenuList"
 import DecideMenu from './DecideMenu';
-import { grey } from '@mui/material/colors';
 
 export default class App extends React.Component{
   constructor(props){
@@ -44,7 +43,7 @@ export default class App extends React.Component{
 
   changeColor = () =>{
     const number = Math.floor(Math.random() * 10);
-
+    console.log(datesetDefault.Menus.mainMenu);
     const changedColor = '#FF6633';
     this.setState({
       color:changedColor

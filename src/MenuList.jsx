@@ -5,7 +5,7 @@ const MenuList = (props) => {
   return (
     <div>
       {props.menus.map((value,index) => {
-        return <Menu name = {value.name} content = {value.content} key={index.toString()} color = {props.color}></Menu>
+        return <Menu id = {value.id} name = {value.name} content = {value.content} key={index.toString()} color = {props.color}></Menu>
       })}
     </div>
   )
