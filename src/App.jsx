@@ -1,72 +1,55 @@
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
 import './assets/styles/style.css';
-import datesetDefault from './dataset';
-import AddMenus from './AddMenus';
-import * as React from 'react';
-import MenuList from "./MenuList"
-import DecideMenu from './DecideMenu';
+import datasetDefault from './dataset';
+import AddMenus from './components/AddMenus';
+import React , { useState, useEffect} from 'react';
+import MenuList from "./components/MenuList"
+import DecideMenu from './components/DecideMenu';
 
-export default class App extends React.Component{
-  constructor(props){
-    super(props);
-      this.state = {
-        menus: [],
-        mainMenu:[],
-        sideMenu:[],
-        garnish:[],
-        dateset: datesetDefault,
-        open: false,
-        color: '#fff',
-      }
-      this.getMenus = this.getMenus.bind(this);
-      this.changeColor = this.changeColor.bind(this);
-    }
+const App = () => {
+  const [dataset,setDataset] = useState(datasetDefault);
+  const [mainMenu,setMainMenu] = useState(dataset.Menus.mainMenu);
+  const [sideMenu,setSideMenus] = useState(dataset.Menus.sideMenus);
+  const [garnish,setGarnish] = useState(dataset.Menus.garnish);
+  const [color,setColor] = useState("fff");
 
-  getMenus = () => {
-    const menus = this.state.dateset;
-    const mainMenu = menus.Menus.mainMenu;
-    const sideMenu = menus.Menus.sideMenus;
-    const garnish = menus.Menus.garnish;
+  const getMenus = (() => {
+    // const menus = datasset;
+    // mainMenu = menus.Menus.mainMenu;
+    // sideMenu = menus.Menus.sideMenus;
+    // garnish = menus.Menus.garnish;
+      // setMainMenu(mainMenu);
+      setMainMenu(mainMenu);
+      setSideMenus(sideMenu);
+      setGarnish(garnish);
+  })
+  
+  useEffect(() =>{
+    getMenus();
+  })
+  
 
-    this.setState({
-      menus:menus,
-      mainMenu:mainMenu,
-      sideMenu:sideMenu,
-      garnish:garnish
-    })
-  }
-
-  componentDidMount(){
-    this.getMenus();
-  }
-
-  changeColor = () =>{
+  const changeColor = () => {
     const number = Math.floor(Math.random() * 10);
-    console.log(datesetDefault.Menus.mainMenu);
     const changedColor = '#FF6633';
-    this.setState({
-      color:changedColor
-    })
-    console.log(this.state.color);
+    setColor(changedColor);
+    console.log(color);
   }
 
-    render() {
-      return (
-        <React.Fragment>
-          <section className='menus'>
-            <MenuList menus={this.state.mainMenu} color ={this.state.color}></MenuList>
-            <MenuList menus={this.state.sideMenu} color ={this.state.color}></MenuList>
-            <MenuList menus={this.state.garnish} color ={this.state.color}></MenuList>
-          </section>
-          <section className='decide-button'>
-            <DecideMenu changeColor = {this.changeColor}></DecideMenu>
-          </section>
-          <section className='add-menu'>
-            <AddMenus getMenus = {this.getMenus}>
-            </AddMenus>
-          </section>
-        </React.Fragment>
-      );
-    }
+  return (
+    <React.Fragment>
+      <section className='menus'>
+        <MenuList menus={mainMenu} color ={color} ></MenuList>
+        <MenuList menus={sideMenu} color ={color} ></MenuList>
+        <MenuList menus={garnish} color ={color} ></MenuList>
+      </section>
+      <section className='decide-button'>
+        <DecideMenu changeColor = {changeColor}></DecideMenu>
+      </section>
+      <section className='add-menu'>
+        <AddMenus getMenus = {getMenus} setMainMenu = {setMainMenu} setSideMenus={setSideMenus} setGarnish={setGarnish} >
+        </AddMenus>
+      </section>
+    </React.Fragment>
+  );
 }
+export default App;

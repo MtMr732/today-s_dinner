@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
-import datesetDefault from './dataset';
+import datesetDefault from '../dataset';
 import MenuItem from '@mui/material/MenuItem';
 
 
@@ -25,10 +24,6 @@ const AddMenus = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [currency, setCurrency] = React.useState('');
-  let [name, setName] = useState("");
-  let [content, setContent] = useState("");
-  // let name = "";
-  // let content = "";
 
   const currencies = [
   {
@@ -48,14 +43,6 @@ const AddMenus = (props) => {
     setCurrency(event.target.value);
   };
 
-  const handleName = (str) => {
-    setName(str);
-  }
-
-  const handleContent = (str) =>{
-    setContent(str);
-  }
-
   // const send = () => {
   //   const garnishList = datesetDefault.Menus.garnish;
   //   name = handleName(document.querySelector('#menu-name').value);
@@ -67,21 +54,22 @@ const AddMenus = (props) => {
   // }
 
 
-  const sendDate = () =>{
+  const sendData = () =>{
     const menuType = document.querySelector('#menu-type').innerHTML;
     const name = document.querySelector('#menu-name').value;
     const content = document.querySelector('#menu-content').value;
     let id ;
     let addedObject = {};
-
       console.log(name, content);
     switch(menuType){
       case '主菜':
         id = datesetDefault.Menus.mainMenu.length + 1;
         addedObject = {id,name,content};
-        datesetDefault.Menus.mainMenu.push(addedObject);
+        // datesetDefault.Menus.mainMenu.push(addedObject);
         console.log(datesetDefault.Menus.mainMenu);
-        props.getMenus();
+        props.setMainMenu(prev=>{
+          return [...prev,addedObject]
+        });
         // jsonファイルでデータ通信するときに使用
         // fetch(datesetDefault.Menus.mainMenu,{
         //   method:'POST',
@@ -97,7 +85,9 @@ const AddMenus = (props) => {
         addedObject = {id,name,content};
         datesetDefault.Menus.sideMenus.push(addedObject);
         console.log(datesetDefault.Menus.sideMenus)
-        props.getMenus();
+        props.setSideMenus(prev=>{
+          return [...prev,addedObject]
+        });
         // jsonファイルでデータ通信するときに使用
           // fetch(datesetDefault.Menus.sideMenus,{
           //   method:'POST',
@@ -113,7 +103,9 @@ const AddMenus = (props) => {
         addedObject = {id,name,content};
         datesetDefault.Menus.garnish.push(addedObject);
         console.log(datesetDefault.Menus.garnish);
-        props.getMenus();
+        props.setGarnish(prev=>{
+          return [...prev]
+        });
         // jsonファイルでデータ通信するときに使用
           // fetch(datesetDefault.Menus.sideMenus,{
           //   method:'POST',
@@ -164,7 +156,7 @@ const AddMenus = (props) => {
             <TextField id="menu-name" label="メニュー名" variant="outlined"/>
             <TextField id="menu-content" label="内容" variant="outlined"/>
           </Box>
-          <Button variant='contained' onClick={sendDate}>
+          <Button variant='contained' onClick={sendData}>
             追加
           </Button>
         </Box>
