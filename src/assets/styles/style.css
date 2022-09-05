@@ -3,6 +3,18 @@
   justify-content: space-around;
 }
 
+.decide-button{
+  display: flex;
+  justify-content: space-around;
+  flex-grow: 3;
+  align-items: flex-start;
+}
+
+.todayMenu{
+  text-align: center;
+  margin: 0 auto;
+  }
+
 .main-menu{
   flex-direction: column;
   padding: 5px;
@@ -18,11 +30,25 @@
   padding: 5px;
 }
 
-.add-menu{
+/* .add-menu{
   clear: left;
   float: right;
-}
+} */
 
 .text {
   text-align: start;
+}
+
+.title {
+  width: 100%;
+  /* height: 150px; */
+  padding: 5px;
+  background-color: #DCC2FF;
+  color: white;
+  font-family: HiraMinProN-W6;
+  font-size: larger;
+}
+
+.removeCircle{
+  cursor: pointer;
 }

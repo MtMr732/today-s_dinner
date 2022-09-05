@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -28,7 +29,7 @@ const Menu = (props)=> {
       <Grid container spacing={2}>
         <Grid item>
           <ButtonBase sx={{ width: 128, height: 128 }}>
-            <Img alt="complex" src="./assets/img/gyouza.jpg" />
+            <Img alt="no image" src="" />
           </ButtonBase>
         </Grid>
         <Grid item xs={12} sm container>
@@ -40,6 +41,7 @@ const Menu = (props)=> {
               <Typography variant="body2" gutterBottom className='text'>
                 {props.content}
               </Typography>
+              <RemoveCircleOutlineIcon onClick={() => props.handleDelete(props.id)} className={"removeCircle"}/>
             </Grid>
           </Grid>
         </Grid>

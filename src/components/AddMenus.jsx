@@ -86,7 +86,7 @@ const AddMenus = (props) => {
         datesetDefault.Menus.sideMenus.push(addedObject);
         console.log(datesetDefault.Menus.sideMenus)
         props.setSideMenus(prev=>{
-          return [...prev,addedObject]
+          return [...prev]
         });
         // jsonファイルでデータ通信するときに使用
           // fetch(datesetDefault.Menus.sideMenus,{

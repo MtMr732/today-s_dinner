@@ -7,7 +7,7 @@ const DecideMenu = (props) => {
 
   return (
     <Stack spacing={2} direction="row">
-      <Button variant="contained" onClick={props.changeColor}>献立を決める</Button>
+      <Button variant="contained" onClick={props.displayMenu}>献立を決める</Button>
     </Stack>
   );
 }
