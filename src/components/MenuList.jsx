@@ -1,12 +1,11 @@
+import axios from "axios";
 import React from "react";
 import Menu from "./Menu";
 
 const MenuList = (props) => {
   const handleDelete = (id) => {
     // props.setMenu(props.menus.filter((menu) => menu.id !== id));
-    fetch(props.url + "/" + id, {
-      method: "DELETE",
-    }).then(props.setMenu(props.menus));
+    axios.delete(props.url + "/" + id).then(props.setMenu(props.menus));
   };
   return (
     <div>

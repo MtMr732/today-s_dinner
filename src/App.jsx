@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import MenuList from "./components/MenuList";
 import DecideMenu from "./components/DecideMenu";
 import { Typography } from "@mui/material";
+import axios from "axios";
 
 const App = () => {
   const dataset = datasetDefault;
@@ -52,15 +53,15 @@ const App = () => {
   };
 
   const fetchdata = () => {
-    fetch("http://localhost:3001/mainMenu")
-      .then((response) => response.json())
-      .then((json) => setMainMenu(json));
-    fetch("http://localhost:3001/sideMenus")
-      .then((response) => response.json())
-      .then((json) => setSideMenus(json));
-    fetch("http://localhost:3001/garnish")
-      .then((response) => response.json())
-      .then((json) => setGarnish(json));
+    axios
+      .get("http://localhost:3001/mainMenu")
+      .then((res) => setMainMenu(res.data));
+    axios
+      .get("http://localhost:3001/sideMenus")
+      .then((res) => setSideMenus(res.data));
+    axios
+      .get("http://localhost:3001/garnish")
+      .then((res) => setGarnish(res.data));
   };
   return (
     <React.Fragment>

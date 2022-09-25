@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import datesetDefault from "../dataset";
 import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -72,17 +73,13 @@ const AddMenus = (props) => {
           localStorage.setItem("mainMenu",JSON.stringify(addedObject));
         */
         // jsonファイルでデータ通信するときに使用
-        fetch("http://localhost:3001/mainMenu", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        axios
+          .post("http://localhost:3001/mainMenu", {
             id: id,
             name: name,
             content: content,
-          }),
-        }).then(handleClose());
+          })
+          .then(handleClose());
         break;
       case "副菜":
         id = (datesetDefault.Menus.sideMenus.length + 1).toString;
@@ -96,17 +93,13 @@ const AddMenus = (props) => {
           localStorage.setItem("sideMenu",JSON.stringify(addedObject));
         */
         // jsonファイルでデータ通信するときに使用
-        fetch("http://localhost:3001/sideMenus", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        axios
+          .post("http://localhost:3001/sideMenus", {
             id: id,
             name: name,
             content: content,
-          }),
-        }).then(handleClose());
+          })
+          .then(handleClose());
         break;
       case "付け合わせ":
         id = (datesetDefault.Menus.garnish.length + 1).toString;
@@ -120,17 +113,13 @@ const AddMenus = (props) => {
           localStorage.setItem("garnish",JSON.stringify(addedObject));
         */
         // jsonファイルでデータ通信するときに使用
-        fetch("http://localhost:3001/garnish", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        axios
+          .post("http://localhost:3001/garnish", {
             id: id,
             name: name,
             content: content,
-          }),
-        }).then(handleClose());
+          })
+          .then(handleClose());
         break;
       default:
     }
