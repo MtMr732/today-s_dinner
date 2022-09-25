@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -41,7 +41,7 @@ const Menu = (props)=> {
               <Typography variant="body2" gutterBottom className='text'>
                 {props.content}
               </Typography>
-              <RemoveCircleOutlineIcon onClick={() => props.handleDelete(props.id)} className={"removeCircle"}/>
+              <DeleteForeverIcon onClick={() => props.handleDelete(props.id)} className={"removeCircle"} sx={{ color: 'error.main' }}/>
             </Grid>
           </Grid>
         </Grid>

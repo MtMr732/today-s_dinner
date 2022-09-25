@@ -8,7 +8,7 @@ import { Typography} from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 
 const App = () => {
-  const [dataset,setDataset] = useState(datasetDefault);
+  const dataset = datasetDefault;
   const [mainMenu,setMainMenu] = useState(dataset.Menus.mainMenu);
   const [sideMenu,setSideMenus] = useState(dataset.Menus.sideMenus);
   const [garnish,setGarnish] = useState(dataset.Menus.garnish);
@@ -30,8 +30,9 @@ const App = () => {
   })
   
   useEffect(() =>{
+    fetchdata();
     getMenus();
-  })
+  },[])
 
   const changeColor = () => {
     const changedColor = '#FF6633';
@@ -47,9 +48,19 @@ const App = () => {
       setTodaySide(sideMenu[Math.floor(Math.random() * sideMenu.length)].name);
       settodayGarnish(garnish[Math.floor(Math.random() * garnish.length)].name)
     }
+
+    const handleClick = () =>{
+      console.log();
+    }
+
+    const fetchdata = () =>{
+      fetch('http://localhost:3001/mainMenu').then( response => response.json()).then(json => setMainMenu(json));
+      fetch('http://localhost:3001/sideMenus').then( response => response.json()).then(json => setSideMenus(json));
+      fetch('http://localhost:3001/garnish').then( response => response.json()).then(json => setGarnish(json));
+    }
   return (
     <React.Fragment>
-      <section className='title'>today'sDinner</section>
+      <section className='title'>today's Dinner</section>
       <section className='decide-button'>
         <DecideMenu displayMenu = {displayMenu}></DecideMenu>
         <section className='todayMenu'>
@@ -64,10 +75,11 @@ const App = () => {
         <h3>メニュー一覧</h3>
       </section>
       <section className='menus'>
-        <MenuList menus={mainMenu} color ={color} title = {"メインディッシュ"} setMenu={setMainMenu}></MenuList>
-        <MenuList menus={sideMenu} color ={color} title = {"副菜"} setMenu={setSideMenus}></MenuList>
-        <MenuList menus={garnish} color ={color} title = {"付け合わせ"} setMenu={setGarnish}></MenuList>
+        <MenuList menus={mainMenu} color ={color} title = {"メインディッシュ"} setMenu={setMainMenu} url={'http://localhost:3001/mainMenu'}></MenuList>
+        <MenuList menus={sideMenu} color ={color} title = {"副菜"} setMenu={setSideMenus} url ={'http://localhost:3001/sideMenus'}></MenuList>
+        <MenuList menus={garnish} color ={color} title = {"付け合わせ"} setMenu={setGarnish} url ={'http://localhost:3001/garnish'}></MenuList>
       </section>
+      <button onClick={handleClick}></button>
     </React.Fragment>
   );
 }

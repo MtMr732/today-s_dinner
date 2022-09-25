@@ -60,61 +60,79 @@ const AddMenus = (props) => {
     const content = document.querySelector('#menu-content').value;
     let id ;
     let addedObject = {};
-      console.log(name, content);
     switch(menuType){
       case '主菜':
-        id = datesetDefault.Menus.mainMenu.length + 1;
+        id = (datesetDefault.Menus.mainMenu.length + 1).toString;
         addedObject = {id,name,content};
-        // datesetDefault.Menus.mainMenu.push(addedObject);
-        console.log(datesetDefault.Menus.mainMenu);
-        props.setMainMenu(prev=>{
-          return [...prev,addedObject]
-        });
-        // jsonファイルでデータ通信するときに使用
-        // fetch(datesetDefault.Menus.mainMenu,{
-        //   method:'POST',
-        //   body:JSON.stringify(datesetDefault),
-        // }).then(()=>{
-        //   alert("メニューの追加が完了しました。")
-        //   name = "";
-        //   content = "";
-        // })
+        // console.log(addedObject);
+        // // datesetDefault.Menus.mainMenu.push(addedObject);
+        // props.setMainMenu(prev=>{
+        //   return [...prev,addedObject]
+        // });
+        // console.log(datesetDefault.Menus.mainMenu);
+        /* localStorageを使用
+          localStorage.setItem("mainMenu",JSON.stringify(addedObject));
+        */
+       // jsonファイルでデータ通信するときに使用
+        fetch('http://localhost:3001/mainMenu',{
+          method:'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify({
+            id:id,
+            name:name,
+            content:content
+          })
+        }).then(handleClose());
         break
       case '副菜':
-        id = datesetDefault.Menus.sideMenus.length + 1
-        addedObject = {id,name,content};
-        datesetDefault.Menus.sideMenus.push(addedObject);
-        console.log(datesetDefault.Menus.sideMenus)
-        props.setSideMenus(prev=>{
-          return [...prev]
-        });
+        id = (datesetDefault.Menus.sideMenus.length + 1).toString;
+        // addedObject = {id,name,content};
+        // datesetDefault.Menus.sideMenus.push(addedObject);
+        // props.setSideMenus(prev=>{
+        //   return [...prev,addedObject]
+        // });
+        // console.log(datesetDefault.Menus.sideMenus)
+        /* localStorageを使用
+          localStorage.setItem("sideMenu",JSON.stringify(addedObject));
+        */
         // jsonファイルでデータ通信するときに使用
-          // fetch(datesetDefault.Menus.sideMenus,{
-          //   method:'POST',
-          //   body:JSON.stringify(datesetDefault),
-          // }).then(()=>{
-          //   alert("メニューの追加が完了しました。")
-          //   name = "";
-          //   content = "";
-          // })
+          fetch('http://localhost:3001/sideMenus',{
+            method:'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+              id:id,
+              name:name,
+              content:content
+            })
+          }).then(handleClose());
         break
       case '付け合わせ':
-        id = datesetDefault.Menus.garnish.length +1 ;
-        addedObject = {id,name,content};
-        datesetDefault.Menus.garnish.push(addedObject);
-        console.log(datesetDefault.Menus.garnish);
-        props.setGarnish(prev=>{
-          return [...prev]
-        });
+        id = (datesetDefault.Menus.garnish.length + 1).toString;
+        // addedObject = {id,name,content};
+        // datesetDefault.Menus.garnish.push(addedObject);
+        // props.setGarnish(prev=>{
+        //   return [...prev,addedObject]
+        // });
+        // console.log(datesetDefault.Menus.garnish);
+        /* localStorageを使用
+          localStorage.setItem("garnish",JSON.stringify(addedObject));
+        */
         // jsonファイルでデータ通信するときに使用
-          // fetch(datesetDefault.Menus.sideMenus,{
-          //   method:'POST',
-          //   body:JSON.stringify(datesetDefault),
-          // }).then(()=>{
-          //   alert("メニューの追加が完了しました。")
-          //   name = "";
-          //   content = "";
-          // })
+          fetch('http://localhost:3001/garnish',{
+            method:'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+              id:id,
+              name:name,
+              content:content
+            })
+          }).then(handleClose());
         break
     }
   }
@@ -154,7 +172,7 @@ const AddMenus = (props) => {
               </TextField>
             </div>
             <TextField id="menu-name" label="メニュー名" variant="outlined"/>
-            <TextField id="menu-content" label="内容" variant="outlined"/>
+            <TextField id="menu-content" label="内容" variant="outlined" multiline rows={4} />
           </Box>
           <Button variant='contained' onClick={sendData}>
             追加
