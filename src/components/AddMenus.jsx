@@ -1,20 +1,19 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Modal from '@mui/material/Modal';
-import datesetDefault from '../dataset';
-import MenuItem from '@mui/material/MenuItem';
-
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Modal from "@mui/material/Modal";
+import datesetDefault from "../dataset";
+import MenuItem from "@mui/material/MenuItem";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -23,21 +22,21 @@ const AddMenus = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [currency, setCurrency] = React.useState('');
+  const [currency, setCurrency] = React.useState("");
 
   const currencies = [
-  {
-    value: 'mainMenu',
-    label: '主菜',
-  },
-  {
-    value: 'sideMenu',
-    label: '副菜',
-  },
-  {
-    value: 'garnish',
-    label: '付け合わせ',
-  }
+    {
+      value: "mainMenu",
+      label: "主菜",
+    },
+    {
+      value: "sideMenu",
+      label: "副菜",
+    },
+    {
+      value: "garnish",
+      label: "付け合わせ",
+    },
   ];
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -53,17 +52,16 @@ const AddMenus = (props) => {
   //   console.log(garnishList);
   // }
 
-
-  const sendData = () =>{
-    const menuType = document.querySelector('#menu-type').innerHTML;
-    const name = document.querySelector('#menu-name').value;
-    const content = document.querySelector('#menu-content').value;
-    let id ;
-    let addedObject = {};
-    switch(menuType){
-      case '主菜':
+  const sendData = () => {
+    const menuType = document.querySelector("#menu-type").innerHTML;
+    const name = document.querySelector("#menu-name").value;
+    const content = document.querySelector("#menu-content").value;
+    let id;
+    // let addedObject = {};
+    switch (menuType) {
+      case "主菜":
         id = (datesetDefault.Menus.mainMenu.length + 1).toString;
-        addedObject = {id,name,content};
+        // addedObject = { id, name, content };
         // console.log(addedObject);
         // // datesetDefault.Menus.mainMenu.push(addedObject);
         // props.setMainMenu(prev=>{
@@ -73,20 +71,20 @@ const AddMenus = (props) => {
         /* localStorageを使用
           localStorage.setItem("mainMenu",JSON.stringify(addedObject));
         */
-       // jsonファイルでデータ通信するときに使用
-        fetch('http://localhost:3001/mainMenu',{
-          method:'POST',
+        // jsonファイルでデータ通信するときに使用
+        fetch("http://localhost:3001/mainMenu", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body:JSON.stringify({
-            id:id,
-            name:name,
-            content:content
-          })
+          body: JSON.stringify({
+            id: id,
+            name: name,
+            content: content,
+          }),
         }).then(handleClose());
-        break
-      case '副菜':
+        break;
+      case "副菜":
         id = (datesetDefault.Menus.sideMenus.length + 1).toString;
         // addedObject = {id,name,content};
         // datesetDefault.Menus.sideMenus.push(addedObject);
@@ -98,19 +96,19 @@ const AddMenus = (props) => {
           localStorage.setItem("sideMenu",JSON.stringify(addedObject));
         */
         // jsonファイルでデータ通信するときに使用
-          fetch('http://localhost:3001/sideMenus',{
-            method:'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-              id:id,
-              name:name,
-              content:content
-            })
-          }).then(handleClose());
-        break
-      case '付け合わせ':
+        fetch("http://localhost:3001/sideMenus", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: id,
+            name: name,
+            content: content,
+          }),
+        }).then(handleClose());
+        break;
+      case "付け合わせ":
         id = (datesetDefault.Menus.garnish.length + 1).toString;
         // addedObject = {id,name,content};
         // datesetDefault.Menus.garnish.push(addedObject);
@@ -122,24 +120,27 @@ const AddMenus = (props) => {
           localStorage.setItem("garnish",JSON.stringify(addedObject));
         */
         // jsonファイルでデータ通信するときに使用
-          fetch('http://localhost:3001/garnish',{
-            method:'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-              id:id,
-              name:name,
-              content:content
-            })
-          }).then(handleClose());
-        break
+        fetch("http://localhost:3001/garnish", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: id,
+            name: name,
+            content: content,
+          }),
+        }).then(handleClose());
+        break;
+      default:
     }
-  }
+  };
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained">メニューを追加する</Button>
+      <Button onClick={handleOpen} variant="contained">
+        メニューを追加する
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -150,7 +151,7 @@ const AddMenus = (props) => {
           <Box
             component="form"
             sx={{
-              '& > :not(style)': { m: 1, width: '25ch' },
+              "& > :not(style)": { m: 1, width: "25ch" },
             }}
             noValidate
             autoComplete="off"
@@ -171,15 +172,21 @@ const AddMenus = (props) => {
                 ))}
               </TextField>
             </div>
-            <TextField id="menu-name" label="メニュー名" variant="outlined"/>
-            <TextField id="menu-content" label="内容" variant="outlined" multiline rows={4} />
+            <TextField id="menu-name" label="メニュー名" variant="outlined" />
+            <TextField
+              id="menu-content"
+              label="内容"
+              variant="outlined"
+              multiline
+              rows={4}
+            />
           </Box>
-          <Button variant='contained' onClick={sendData}>
+          <Button variant="contained" onClick={sendData}>
             追加
           </Button>
         </Box>
       </Modal>
     </div>
   );
-}
-export default  AddMenus
+};
+export default AddMenus;
