@@ -109,7 +109,6 @@ const App = () => {
           url={"http://localhost:3001/garnish"}
         ></MenuList>
       </section>
-      <button onClick={handleClick}></button>
     </React.Fragment>
   );
 };
